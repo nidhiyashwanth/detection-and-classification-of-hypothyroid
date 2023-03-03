@@ -112,7 +112,7 @@ class Model_Finder:
     #                                     Output: The model with the best parameters
     #                                     On Failure: Raise Exception
     #
-    #                                     Written By: iNeuron Intelligence
+    #                                     Written By: Nidhi Yashavanta
     #                                     Version: 1.0
     #                                     Revisions: None
     #

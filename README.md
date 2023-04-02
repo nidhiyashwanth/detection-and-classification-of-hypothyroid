@@ -15,4 +15,4 @@
 - Create virtual environment - conda create -n myenv python=3.7
 - Activate the environment - conda activate myenv
 - Install the packages - pip install -r requirements.txt
-- Run the app - python run app.py
+- Run the app - python app.py

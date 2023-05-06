@@ -6,7 +6,7 @@ from flask import Flask, render_template, request, redirect, url_for, send_from_
 from flask_cors import CORS, cross_origin
 from predictFromModel import prediction
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 
 app.config["csv_file"] = "Prediction_Output_File/"
 app.config["sample_file"] = "Prediction_SampleFile/"
@@ -72,5 +72,5 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='127.0.0.1', port=8000,debug=True)
 

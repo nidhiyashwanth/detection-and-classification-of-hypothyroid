@@ -8,7 +8,7 @@
 - Back-end: Flask framework
 - IDE: Jupyter Notebook, Pycharm & VSCode
 - Database: Cassandra 
-- Deployment: Heroku
+- Deployment: Amazon Beanstalk
 
 ## How to run this app 
 

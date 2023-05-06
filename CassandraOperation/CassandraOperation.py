@@ -6,6 +6,7 @@ import os as os
 from os import listdir
 import pandas as pd
 import shutil
+import ssl
 
 
 class dBOperation:
@@ -20,33 +21,70 @@ class dBOperation:
         self.goodFilePath = "Training_Raw_files_validated/Good_Raw"
         self.logger = App_Logger()
         self.secure_connect_bundle = 'secure-connect-test.zip'
-        self.client_id = 'iNFxEAjKMehBFeWDMynjNZaG'
-        self.client_secret = 'Jo6H30OBMLcAJss5EnoTtie-eev3_tay.-4o3MMOf-wPIQFkB2qKjw-AX6Jk4TIuBwtgIuT+C2jNK+JC-3r6.oA.FBuS3SqfHDSNAvuhNt2-k+SKmc5iRFG.fEg5Pdre'
+        self.client_id = 'bMmIkAaJqWjyXWqamEzcpOMG'
+        self.client_secret = 'lTPDHrI+N+pMWy9on+Ucth1HUa2h+Z5ku,0eHPNDQ+4.OrnGDh.9nOlE+3R3w.z9bz4780TRMFNLQ.yCH1yZdm-JYL1dE36tjJZ4JzZGX9yHridycN.2r7,BSTQehOIX'
 
+    # def dataBaseConnection(self):
+    #
+    #     """
+    #             Method Name: dataBaseConnection
+    #             Description: This method creates the database with the given name and if Database already exists then opens the connection to the DB.
+    #             Output: Connection to the DB
+    #             On Failure: Raise ConnectionError
+    #
+    #
+    #             """
+    #     try:
+    #         cloud_config = {'secure_connect_bundle': self.secure_connect_bundle}
+    #
+    #         auth_provider = PlainTextAuthProvider(self.client_id, self.client_secret)
+    #         cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
+    #         session = cluster.connect()
+    #         row = session.execute("select release_version from system.local").one()
+    #
+    #         file = open("Training_Logs/CassandraConnectionLog.txt", 'a+')
+    #         self.logger.log(file, "Cassandra database connection successful")
+    #         file.close()
+    #     except ConnectionError:
+    #         file = open("Training_Logs/CassandraConnectionLog.txt", 'a+')
+    #         self.logger.log(file, "Error while connecting to database: %s" % ConnectionError)
+    #         file.close()
+    #         raise ConnectionError
+    #
+    #     return session
     def dataBaseConnection(self):
-
         """
-                Method Name: dataBaseConnection
-                Description: This method creates the database with the given name and if Database already exists then opens the connection to the DB.
-                Output: Connection to the DB
-                On Failure: Raise ConnectionError
-
-
-                """
+        Method Name: dataBaseConnection
+        Description: This method creates the database with the given name and if Database already exists then opens the connection to the DB.
+        Output: Connection to the DB
+        On Failure: Raise ConnectionError
+        """
         try:
-            cloud_config = {'secure_connect_bundle': self.secure_connect_bundle}
+            cloud_config = {
+                'secure_connect_bundle': os.path.join(os.getcwd(), self.secure_connect_bundle)
+            }
 
-            auth_provider = PlainTextAuthProvider(self.client_id, self.client_secret)
-            cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
+            ssl_context = ssl.create_default_context()
+            ssl_context.load_cert_chain(os.path.join(os.getcwd(), self.client_cert),
+                                        os.path.join(os.getcwd(), self.client_key))
+
+            cluster = Cluster(
+                cloud=cloud_config,
+                auth_provider=PlainTextAuthProvider(
+                    username=self.client_id,
+                    password=self.client_secret
+                ),
+                ssl_context=ssl_context
+            )
             session = cluster.connect()
             row = session.execute("select release_version from system.local").one()
 
             file = open("Training_Logs/CassandraConnectionLog.txt", 'a+')
             self.logger.log(file, "Cassandra database connection successful")
             file.close()
-        except ConnectionError:
+        except Exception as e:
             file = open("Training_Logs/CassandraConnectionLog.txt", 'a+')
-            self.logger.log(file, "Error while connecting to database: %s" % ConnectionError)
+            self.logger.log(file, "Error while connecting to database: %s" % e)
             file.close()
             raise ConnectionError
 

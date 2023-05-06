@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <title>Prediction Page</title>
     <meta charset="utf-8">
@@ -11,18 +12,34 @@
 	<style>
 		body{font-family:Lato,'Helvetica Neue',Helvetica,Arial,sans-serif;}
 		h1,h2,h3,h4,h5,h6{font-family:Lato,'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;align:center;}
-		.title{color: #0069d9;}
+		.title{
+			color: #000000;
+			font-weight: bold;
+		}
 		#fortitle {margin-left: 17%}
 		#fetch{cursor:pointer;}
 		#stopfetch{cursor:pointer;}
 		#fetch:hover,#fetch:active,#fetch:focus,#stopfetch:hover,#stopfetch:active,#stopfetch:focus{background-color:#ff7f00;border-color:#ff7f00;}
 		footer.footer{padding-top:1rem;padding-bottom:1rem;background-color: #e3e8ed!important;}
 		footer a{color:#000;font-weight:600;text-decoration:none;}
-		footer li a:hover{color:orange;}
+		footer li a:hover{color:gray;}
 		footer li i{color:#363e75;}
-		footer li i:hover{color:orange;}
+		footer li i:hover{color:gray;}
 		.navbar-light .navbar-brand{color: rgba(0,0,0,.9);}
 		.navbar-light .navbar-brand {margin-left: auto;margin-right: auto;}
+
+		.logo-container {
+			display: flex;
+	align-items: center;
+
+
+		}
+
+		.logo-container img {
+			max-height: 50px;
+			margin-right: 10px;
+		}
+
 		.container-fluid{
 			width:90%;
 			text-align: center;
@@ -106,25 +123,43 @@
 				transform: rotate(360deg);
 			}
 		}
+
+		.btn-primary{
+			background-color: black;
+			border-color: black;
+		}
+		.btn-primary:hover,
+		.btn-primary:active {
+			color: white;
+			background-color: rgb(80, 77, 77);
+			border-color: rgb(80, 77, 77);
+		}
+
+
+
 		.footer{position:absolute;bottom:0px;width:100%;}
 		#datafetch_form{padding:0px 40px;}
 		.json-result{}
 		.result-box p{text-align:left;}
 	</style>
+
 </head>
 
 <body>
-
 	<!-- Navigation -->
-	<nav class="navbar navbar-light bg-light static-top text-center">
-		<div class="container" align="right">
-			<h3 class="title" id="fortitle" align="right">DETECTION AND CLASSIFICATION OF THYROID DISEASE</h3>
+	<nav class="navbar navbar-light bg-light static-top">
+	<div class="container d-flex justify-content-center align-items-center">
+		<div class="logo-container mr-2">
+			<img src="https://i.ibb.co/4jwJf7c/college-logo1.png" alt="MEH">
+<!--			<img src="college_logo.png" alt="meh">-->
 		</div>
-	</nav>
+		<h3 class="title mb-0">GOVERNMENT ENGINEERING COLLEGE GANGAVATHI</h3>
+	</div>
+</nav>
 
 	<!-- Testimonials -->
 	<section class="testimonials text-center">
-		<h3>GOVERNMENT ENGINEERING COLLEGE GANGAVATHI</h3>
+		<h3>DETECTION AND CLASSIFICATION OF HYPOTHYROID USING MACHINE LEARNING</h3>
 		<div class="container-fluid">
 			<h3 class="my-4 title">Prediction</h3>
 			<div class="row">
@@ -192,7 +227,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script>
-
 		$(document).ready(function(){
 			$('#loading').hide();
 			$("#customfile").click(function(e){

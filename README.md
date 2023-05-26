@@ -16,3 +16,5 @@
 - Activate the environment - conda activate myenv
 - Install the packages - pip install -r requirements.txt
 - Run the app - python app.py
+### Link to run the deployment
+http://detectionandclassificationofhypo-env.eba-ukxrnngr.us-east-1.elasticbeanstalk.com/
